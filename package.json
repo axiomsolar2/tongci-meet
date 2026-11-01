@@ -1,0 +1,18 @@
+{
+  "name": "tongci-meet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "同词相遇 - 好友在线文字游戏",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}

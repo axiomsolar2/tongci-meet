@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="description" content="同词相遇 - 和朋友自由说出一个词，看看你们何时想到一起。">
+  <title>同词相遇 · 和朋友想到一起</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="同词相遇首页">
+      <span class="brand-mark"><i></i><i></i></span>
+      <span>同词相遇</span>
+    </a>
+    <div class="top-note"><span class="live-dot"></span> 好友实时对战</div>
+  </header>
+
+  <main class="shell">
+    <section id="homeView" class="view">
+      <div class="hero">
+        <div class="eyebrow">A LITTLE GAME OF CONNECTION</div>
+        <h1>你说的，<span>会不会也是我想的？</span></h1>
+        <p class="hero-copy">不设主题，不给提示。和朋友各自说出一个词，<br class="desktop-only">直到某一刻，你们想到了一起。</p>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+          <div class="word-card word-left"><span>你想到</span><strong>?</strong></div>
+          <div class="word-card word-right"><span>我想到</span><strong>?</strong></div>
+          <div class="sparkle sparkle-a">✳</div><div class="sparkle sparkle-b">✦</div>
+          <div class="center-link"><span></span><span></span></div>
+        </div>
+        <div class="name-field">
+          <label for="nickname">你的昵称</label>
+          <input id="nickname" maxlength="12" placeholder="给自己起个名字" autocomplete="nickname">
+        </div>
+        <div class="home-actions">
+          <button id="createBtn" class="button button-dark">创建好友房间 <span>↗</span></button>
+          <button id="joinToggleBtn" class="button button-light">加入房间</button>
+        </div>
+        <div id="joinPanel" class="join-panel hidden">
+          <label for="roomCodeInput">输入好友分享的 6 位房间号</label>
+          <div class="join-row">
+            <input id="roomCodeInput" maxlength="6" placeholder="例如 A7K2PQ" autocomplete="off">
+            <button id="joinBtn" class="button button-dark">加入</button>
+          </div>
+        </div>
+        <p class="microcopy">两个人 · 一场默契测试 · 无限可能</p>
+      </div>
+    </section>
+
+    <section id="roomView" class="view hidden">
+      <div class="room-heading">
+        <div><div class="eyebrow">YOUR PRIVATE ROOM</div><h2>好友房间</h2></div>
+        <button id="leaveBtn" class="text-button">离开房间</button>
+      </div>
+      <div class="room-code-card">
+        <div><span class="muted-label">房间号码</span><strong id="roomCode">------</strong><small>把房间号分享给你的朋友</small></div>
+        <button id="copyCodeBtn" class="copy-button">复制房间号 <span>▢</span></button>
+      </div>
+      <div class="players-grid">
+        <div class="player-card">
+          <div class="avatar avatar-one" id="avatarOne">你</div>
+          <div class="player-meta"><strong id="playerOneName">玩家 1</strong><span id="playerOneStatus">等待中</span></div>
+          <span class="player-indicator"></span>
+        </div>
+        <div class="versus">＋</div>
+        <div class="player-card">
+          <div class="avatar avatar-two" id="avatarTwo">友</div>
+          <div class="player-meta"><strong id="playerTwoName">等待好友加入</strong><span id="playerTwoStatus">尚未加入</span></div>
+          <span class="player-indicator" id="playerTwoIndicator"></span>
+        </div>
+      </div>
+      <div id="waitingPanel" class="waiting-panel">
+        <div class="waiting-icon">⌁</div>
+        <strong>房间已准备就绪</strong>
+        <p>邀请一位朋友加入。两个人都到齐后，就可以开始了。</p>
+        <button id="startBtn" class="button button-dark" disabled>等待好友加入</button>
+      </div>
+      <div id="gamePanel" class="game-panel hidden">
+        <div class="game-topline"><span class="round-pill">第 <b id="roundNumber">1</b> 轮</span><span id="submitStatus" class="submit-status">等待双方提交</span></div>
+        <h2>此刻，你脑海里<br>第一个浮现的词是什么？</h2>
+        <p class="game-hint">不要商量，不要猜测。只说你真正想到的那个词。</p>
+        <form id="wordForm" class="word-form">
+          <input id="wordInput" maxlength="30" placeholder="写下你想到的词…" autocomplete="off">
+          <button id="submitWordBtn" class="button button-dark" type="submit">提交答案 <span>↗</span></button>
+        </form>
+        <div id="submittedNotice" class="submitted-notice hidden"><span class="checkmark">✓</span><span>答案已锁定。等对方提交后一起揭晓。</span></div>
+        <div class="privacy-note"><span>◉</span> 提交前，双方都看不到彼此的答案</div>
+      </div>
+      <div id="resultPanel" class="result-panel hidden">
+        <div id="resultSymbol" class="result-symbol">✦</div>
+        <div id="resultEyebrow" class="eyebrow">A PERFECT MATCH</div>
+        <h2 id="resultTitle">你们想到一起了。</h2>
+        <p id="resultDescription">有些默契，不需要提前约定。</p>
+        <div id="answerCards" class="answer-cards"></div>
+        <div id="resultActions" class="result-actions"></div>
+      </div>
+    </section>
+
+    <section class="leaderboard-section">
+      <div class="section-heading"><div><div class="eyebrow">THE MOST IN SYNC</div><h2>默契排行榜</h2></div><span class="ranking-caption">TOP 20</span></div>
+      <div class="leaderboard-card">
+        <div class="leaderboard-head"><span>玩家</span><span>相遇次数</span><span>场均轮数</span></div>
+        <div id="leaderboardRows" class="leaderboard-rows"><div class="empty-ranking">还没有上榜玩家，来成为第一个吧。</div></div>
+      </div>
+      <p class="ranking-footnote">排行榜依据相遇次数排序；场均轮数越少，代表越快找到共同答案。</p>
+    </section>
+    <footer><span>同词相遇</span><span>让偶然的相同，成为特别的默契。</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
